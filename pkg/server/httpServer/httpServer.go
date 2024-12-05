@@ -19,7 +19,7 @@ type Option struct {
 }
 
 type HttpServer struct {
-	ctx       context.Context
+	Ctx       context.Context
 	ginEngine *gin.Engine
 	instance  *http.Server
 	option    Option
@@ -75,7 +75,7 @@ func NewHttpServer(options ...Option) *HttpServer {
 
 	ctx := context.Background()
 	s := HttpServer{
-		ctx:    ctx,
+		Ctx:    ctx,
 		option: option,
 	}
 	s.createServer()
@@ -95,6 +95,7 @@ func (s *HttpServer) Start() {
 func (s *HttpServer) createServer() {
 	gin.SetMode(s.option.Mode)
 	s.ginEngine = gin.New()
+	s.ginEngine.Use(gin.Recovery())
 	s.instance = &http.Server{
 		Addr:           ":" + strconv.Itoa(s.option.Port),
 		Handler:        s.ginEngine,
@@ -111,9 +112,7 @@ func (s *HttpServer) registerPprof() {
 }
 
 func (s *HttpServer) RegisterHandler(method, uri string, logic func(ctx *gin.Context)) {
-	s.ginEngine.Handle(method, uri, func(c *gin.Context) {
-		logic(c)
-	})
+	s.ginEngine.Handle(method, uri, logic)
 }
 
 func (s *HttpServer) RegisterMiddleware(handler func(ctx *gin.Context)) {
