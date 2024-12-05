@@ -38,12 +38,15 @@ func main() {
 	//加载redis
 	redis.Start()
 
-	server := httpServer.NewHttpServer()
-	server.RegisterMiddleware(Cors())
-	server.RegisterHandler("GET", "/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-	server.Start()
+	//server := httpServer.NewHttpServer()
+	//server.RegisterMiddleware(Cors())
+	//server.RegisterHandler("GET", "/ping", func(c *gin.Context) {
+	//	c.JSON(200, gin.H{
+	//		"message": "pong",
+	//	})
+	//})
+	//server.Start()
+	server := httpServer.NewHttp()
+	r := server.GinNew()
+	server.Start(r)
 }
