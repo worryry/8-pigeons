@@ -13,12 +13,12 @@ func init() {
 type Example struct {
 }
 
-func (e *Example) Name_GET(c *gin.Context) {
+func (e *Example) NameGet(c *gin.Context) {
 	user := []int{1, 23, 4}
 	c.JSON(http.StatusOK, gin.H{"code": 1, "msg": "ok", "data": user})
 }
 
-func (e *Example) Name(c *gin.Context) {
+func (e *Example) GetNameList(c *gin.Context) {
 	user := []int{1, 23, 4}
 	c.JSON(http.StatusOK, gin.H{"code": 1, "msg": "ok", "data": user})
 }

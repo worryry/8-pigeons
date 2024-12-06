@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"github.com/gin-gonic/gin"
-	R "github.com/worryry/8-pigeons/pkg/server/router"
 	"github.com/worryry/8-pigeons/pkg/setting"
 	"log"
 	"net/http"
@@ -45,8 +44,6 @@ func (s *Http) GinNew() *gin.Engine {
 }
 
 func (s *Http) Start(router *gin.Engine) {
-	R.InitRouter(router)
-
 	srv := &http.Server{
 		Addr:           ":" + strconv.Itoa(setting.GetInt("server.port")),
 		Handler:        router,

@@ -7,6 +7,7 @@ import (
 	"github.com/worryry/8-pigeons/pkg/database/redis"
 	"github.com/worryry/8-pigeons/pkg/logger"
 	"github.com/worryry/8-pigeons/pkg/server/httpServer"
+	"github.com/worryry/8-pigeons/pkg/server/router"
 	"github.com/worryry/8-pigeons/pkg/setting"
 	"net/http"
 )
@@ -49,5 +50,10 @@ func main() {
 	//server.Start()
 	server := httpServer.NewHttp()
 	r := server.GinNew()
+	//加载路由文件
+	r = router.InitRouter(r)
+	group := r.Group("/api")
+	r = router.InitGroupRouter(r, group, Cors())
+
 	server.Start(r)
 }
