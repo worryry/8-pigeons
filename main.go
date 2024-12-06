@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	_ "github.com/worryry/8-pigeons/controller/api"
 	"github.com/worryry/8-pigeons/pkg/database/mysql"
 	"github.com/worryry/8-pigeons/pkg/database/redis"
 	"github.com/worryry/8-pigeons/pkg/logger"
