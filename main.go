@@ -52,8 +52,8 @@ func main() {
 	r := server.GinNew()
 	//加载路由文件
 	r = router.InitRouter(r)
-	group := r.Group("/api")
-	r = router.InitGroupRouter(r, group, Cors())
+	//group := r.Group("/api")
+	//r = router.InitGroupRouter(r, group, Cors())
 
 	server.Start(r)
 }

@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/worryry/8-pigeons/pkg/array"
 	"log"
 	"reflect"
 	"strings"
@@ -111,7 +112,9 @@ func baseBind(r *gin.RouterGroup, class, action string, handler gin.HandlerFunc)
 	// 分割 action字符串，取出最后一段，用来匹配请求类型，形如：list_get , info_push，则取出：get 和 push
 	fields := strings.Split(action, "_")
 	method := fields[len(fields)-1]
-	path = strings.Replace(path, "_"+method, "", 1)
+	if array.InArray(method, []string{"get", "put", "patch", "head", "options", "delete", "any"}) {
+		path = strings.Replace(path, "_"+method, "", 1)
+	}
 	switch method {
 	case "get":
 		r.GET(path, handler)
