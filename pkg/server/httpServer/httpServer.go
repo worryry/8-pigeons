@@ -128,6 +128,11 @@ func (s *HttpServer) Engine() *gin.Engine {
 	return s.ginEngine
 }
 
+func (s *HttpServer) SetEngine(e *gin.Engine) *HttpServer {
+	s.ginEngine = e
+	return s
+}
+
 func (s *HttpServer) Shutdown() {
 
 }
