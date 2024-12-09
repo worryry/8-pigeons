@@ -35,8 +35,8 @@ func (s *Http) GinNew() *gin.Engine {
 	//以及一些自定义中间件
 
 	//加载静态资源， css js image
-	//r.StaticFS("/public", http.Dir("./static"))
-	//r.StaticFile("/favicon.ico", "./static/ico/favicon.ico")
+	r.StaticFS("/public", http.Dir("./static"))
+	r.StaticFile("/favicon.ico", "./static/ico/favicon.ico")
 
 	//路由
 	//routes.R
@@ -44,6 +44,22 @@ func (s *Http) GinNew() *gin.Engine {
 }
 
 func (s *Http) Start(router *gin.Engine) {
+	srv := &http.Server{
+		Addr:           ":" + strconv.Itoa(setting.GetInt("server.port")),
+		Handler:        router,
+		ReadTimeout:    60 * time.Second,
+		WriteTimeout:   60 * time.Second,
+		MaxHeaderBytes: 1 << 20,
+	}
+	log.Printf("监听端口%v", srv.Addr)
+	err := srv.ListenAndServe()
+	if err != nil && !errors.Is(err, http.ErrServerClosed) {
+		log.Fatalf("http启动失败: %v", err)
+		return
+	}
+}
+
+func (s *Http) StartByGrouting(router *gin.Engine) {
 	srv := &http.Server{
 		Addr:           ":" + strconv.Itoa(setting.GetInt("server.port")),
 		Handler:        router,
