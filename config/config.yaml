@@ -8,10 +8,10 @@ log:
 
 mysql:
   enable: false
-  dbName: drama
-  user: drama
-  pwd: RD8zcYJPP5Hp7jMe
-  host: 124.221.56.179:3306
+  dbName: 8-pigeons
+  user: 8-pigeons
+  pwd: "123456"
+  host: 127.0.0.1:3306
   tablePrefix: dr_
   charset: utf8mb4
   parseTime: true
