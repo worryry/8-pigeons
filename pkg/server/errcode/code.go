@@ -14,11 +14,3 @@ var (
 	UnauthorizedError         = NewError(10000009, "接口签名失败")
 	ErrorUploadFileFail       = NewError(20030001, "上传文件失败")
 )
-
-var (
-	ShopUserExist    = NewError(30010001, "DM已存在")
-	ShopUserNotExist = NewError(30010002, "DM不存在")
-
-	DramaCodeHasUsed  = NewError(30020001, "领取码已被使用")
-	RoleHasBeenChoose = NewError(30020002, "该角色已被选择")
-)
