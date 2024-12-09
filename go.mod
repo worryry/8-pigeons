@@ -3,11 +3,13 @@ module github.com/worryry/8-pigeons
 go 1.23.3
 
 require (
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-contrib/pprof v1.5.1
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/json-iterator/go v1.1.12
 	github.com/sirupsen/logrus v1.9.3
+	github.com/sony/sonyflake v1.2.0
 	github.com/spf13/viper v1.19.0
 	gorm.io/driver/mysql v1.5.7
 	gorm.io/gorm v1.25.7

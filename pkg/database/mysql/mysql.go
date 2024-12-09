@@ -12,6 +12,7 @@ import (
 )
 
 var DB *gorm.DB
+var DSN string
 
 func Start() {
 	isEnabled := setting.GetBool("mysql.enable")
@@ -34,6 +35,7 @@ func DbInit() *gorm.DB {
 		pwd,
 		host,
 		dbName)
+	DSN = dsn
 	ClientDb, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
 		DisableForeignKeyConstraintWhenMigrating: true,
 		NamingStrategy: schema.NamingStrategy{
@@ -53,4 +55,9 @@ func DbInit() *gorm.DB {
 	// 最长连接时间
 	sqlDB.SetConnMaxLifetime(5 * time.Minute)
 	return ClientDb
+}
+
+// 获取链接URI
+func mySQLUri() string {
+	return DSN
 }
