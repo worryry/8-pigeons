@@ -96,6 +96,9 @@ func (s *HttpServer) createServer() {
 	gin.SetMode(s.option.Mode)
 	s.ginEngine = gin.New()
 	s.ginEngine.Use(gin.Recovery())
+	if setting.GetString("server.mode") != gin.ReleaseMode {
+		s.Engine().Use(gin.Logger())
+	}
 	s.instance = &http.Server{
 		Addr:           ":" + strconv.Itoa(s.option.Port),
 		Handler:        s.ginEngine,
