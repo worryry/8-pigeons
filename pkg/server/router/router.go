@@ -90,20 +90,20 @@ func HandlerFunc(v Route) gin.HandlerFunc {
 
 func baseBind(r *gin.RouterGroup, class, action string, handler gin.HandlerFunc) {
 	//先解析module
-	//module := ""
+	module := ""
 	ctrl := ""
 	if strings.Contains(class, ".") {
 		// 此时结果类似“Article”
 		ctrl = class[strings.Index(class, ".")+1:]
-		//module = class[1:strings.Index(class, ".")]
+		module = class[1:strings.Index(class, ".")]
 	}
 	// 驼峰方式全部转为下划线分割，如：ListGet => list_get, InfoPush => info_push
-	//module = CamelCaseToUnderscore(module)
+	module = CamelCaseToUnderscore(module)
 	ctrl = CamelCaseToUnderscore(ctrl)
 	action = CamelCaseToUnderscore(action)
 
-	//path := "/" + module + "/" + ctrl + "/" + action
-	path := "/" + ctrl + "/" + action
+	path := "/" + module + "/" + ctrl + "/" + action
+	//path := "/" + ctrl + "/" + action
 	// action 中不包含下划线"_"，直接匹配 POST模式
 	if !strings.Contains(action, "_") {
 		r.POST(path, handler)
