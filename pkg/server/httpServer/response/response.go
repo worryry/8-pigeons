@@ -23,7 +23,7 @@ type List struct {
 	List  interface{} `json:"list"`
 }
 
-func ToErrResponse(ctx *gin.Context, err errcode.Error) {
+func ToErrResponse(ctx *gin.Context, err *errcode.Error) {
 	resp := Dto{
 		Code:    err.Code,
 		Message: err.Message,
