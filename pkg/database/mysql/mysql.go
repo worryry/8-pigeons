@@ -29,12 +29,14 @@ func DbInit() *gorm.DB {
 	pwd := setting.GetString("mysql.pwd")
 	prefix := setting.GetString("mysql.tablePrefix")
 	host := setting.GetString("mysql.host")
+	charset := setting.GetString("mysql.charset")
 
 	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=%s&parseTime=True&loc=Local",
 		user,
 		pwd,
 		host,
-		dbName)
+		dbName,
+		charset)
 	DSN = dsn
 	ClientDb, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
 		DisableForeignKeyConstraintWhenMigrating: true,
