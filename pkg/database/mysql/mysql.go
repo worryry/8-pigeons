@@ -58,8 +58,3 @@ func DbInit() *gorm.DB {
 	sqlDB.SetConnMaxLifetime(5 * time.Minute)
 	return ClientDb
 }
-
-// 获取链接URI
-func mySQLUri() string {
-	return DSN
-}
