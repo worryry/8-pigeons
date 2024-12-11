@@ -19,7 +19,7 @@ type Dto struct {
 }
 
 type List struct {
-	Total int         `json:"total"`
+	Total int32       `json:"total"`
 	List  interface{} `json:"list"`
 }
 
